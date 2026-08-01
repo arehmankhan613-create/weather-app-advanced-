@@ -31,7 +31,10 @@ async function getWeather(position){
     let response = await fetch(url);
 
     let data = await response.json();
-
+if(data.cod == "404"){
+    alert("City not found");
+    return;
+}
 
     document.getElementById("city").innerHTML =
     data.name + ", " + data.sys.country;
