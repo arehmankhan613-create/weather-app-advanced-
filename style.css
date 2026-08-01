@@ -42,4 +42,12 @@ button{
 
 h1{
     color:#2196f3;
+}input{
+
+padding:12px;
+width:80%;
+border-radius:10px;
+border:1px solid #ccc;
+margin-bottom:10px;
+
 }
