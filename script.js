@@ -147,4 +147,4 @@ async function getForecast(city){
     }
 
 
-}
+}console.log("Forecast Function Loaded");
