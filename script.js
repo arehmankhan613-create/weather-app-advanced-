@@ -1,37 +1,53 @@
+const apiKey = "YOUR_API_KEY";
+
+
 function getLocation(){
 
-if(navigator.geolocation){
+    if(navigator.geolocation){
 
-navigator.geolocation.getCurrentPosition(showWeather);
+        navigator.geolocation.getCurrentPosition(getWeather);
 
-}
-else{
-
-alert("Location not supported");
-
-}
+    }
+    else{
+        alert("Location not supported");
+    }
 
 }
 
 
-function showWeather(position){
+async function getWeather(position){
+
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
 
 
-let lat = position.coords.latitude;
-let lon = position.coords.longitude;
+    let url = 
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
 
-// Demo weather data
+    let response = await fetch(url);
 
-document.getElementById("city").innerHTML="Your Location";
+    let data = await response.json();
 
-document.getElementById("temp").innerHTML="28 °C";
 
-document.getElementById("condition").innerHTML="Cloudy 🌥️";
+    document.getElementById("city").innerHTML =
+    data.name;
 
-document.getElementById("humidity").innerHTML="Humidity: 70%";
 
-document.getElementById("wind").innerHTML="Wind: 10 km/h";
+    document.getElementById("temp").innerHTML =
+    data.main.temp + " °C";
+
+
+    document.getElementById("condition").innerHTML =
+    data.weather[0].description;
+
+
+    document.getElementById("humidity").innerHTML =
+    "Humidity: " + data.main.humidity + "%";
+
+
+    document.getElementById("wind").innerHTML =
+    "Wind: " + data.wind.speed + " km/h";
 
 
 }
