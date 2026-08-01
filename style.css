@@ -1,6 +1,6 @@
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:linear-gradient(#4facfe,#00f2fe);
     height:100vh;
     display:flex;
@@ -10,11 +10,13 @@ body{
 
 
 .container{
+
     background:white;
-    width:320px;
+    width:350px;
     padding:25px;
     text-align:center;
     border-radius:20px;
+
 }
 
 
@@ -31,7 +33,6 @@ button{
     color:white;
     border-radius:10px;
     cursor:pointer;
-    margin:5px;
 
 }
 
@@ -60,6 +61,32 @@ input{
 #icon{
 
     width:80px;
-    height:80px;
+
+}
+
+
+.forecast{
+
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+    overflow-x:auto;
+
+}
+
+
+.card{
+
+    background:#f2f2f2;
+    padding:10px;
+    border-radius:15px;
+    min-width:90px;
+
+}
+
+
+.card img{
+
+    width:50px;
 
 }
