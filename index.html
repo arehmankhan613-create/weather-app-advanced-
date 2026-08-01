@@ -1,7 +1,6 @@
-<input type="text" id="cityInput" placeholder="Enter City Name">
-
-<button onclick="searchCity()">Search</button><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,15 +16,28 @@
 
     <button onclick="getLocation()">Use My Location</button>
 
+    <br><br>
+
+    <input type="text" id="cityInput" placeholder="Enter City Name">
+
+    <button onclick="searchCity()">Search</button>
+
+
     <div class="weather-box">
+
         <h2 id="city">Mumbai</h2>
 
         <h3 id="temp">-- °C</h3>
 
-        <p id="condition"><img id="icon" src="" alt="weather icon">Click button to get weather</p>
+        <p id="condition">
+            <img id="icon" src="" alt="weather icon">
+            Click button to get weather
+        </p>
 
         <p id="humidity"></p>
+
         <p id="wind"></p>
+
     </div>
 
 </div>
@@ -34,4 +46,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
