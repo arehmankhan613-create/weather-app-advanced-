@@ -3,16 +3,7 @@ const apiKey = "3d12bfd7c67376c39b298450c321d916";
 
 function getLocation(){
 
-    if(navigator.geolocation){
-
-        navigator.geolocation.getCurrentPosition(getWeather);
-
-    }
-    else{
-
-        alert("Location not supported");
-
-    }
+navigator.geolocation.getCurrentPosition(getWeather);
 
 }
 
@@ -20,97 +11,135 @@ function getLocation(){
 
 async function getWeather(position){
 
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
+let lat = position.coords.latitude;
+let lon = position.coords.longitude;
 
 
-    let url = 
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+let url =
+`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
 
-    let response = await fetch(url);
+let response = await fetch(url);
 
-    let data = await response.json();
-if(data.cod == "404"){
-    alert("City not found");
-    return;
-}
-
-    document.getElementById("city").innerHTML =
-    data.name + ", " + data.sys.country;
+let data = await response.json();
 
 
-    document.getElementById("temp").innerHTML =
-    data.main.temp + " °C";
-
-
-    document.getElementById("condition").innerHTML =
-    data.weather[0].description;
-
-
-    document.getElementById("icon").src =
-    "https://openweathermap.org/img/wn/" 
-    + data.weather[0].icon + "@2x.png";
-
-
-    document.getElementById("humidity").innerHTML =
-    "Humidity: " + data.main.humidity + "%";
-
-
-    document.getElementById("wind").innerHTML =
-    "Wind: " + data.wind.speed + " km/h";
+showWeather(data);
 
 }
-
 
 
 
 async function searchCity(){
 
-    let city = document.getElementById("cityInput").value;
+let city = document.getElementById("cityInput").value;
 
 
-    if(city == ""){
+if(city==""){
 
-        alert("Please enter city name");
-        return;
+alert("Enter city name");
+return;
 
-    }
-
-
-    let url =
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+}
 
 
-    let response = await fetch(url);
-
-    let data = await response.json();
-
+let url =
+`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 
-    document.getElementById("city").innerHTML =
-    data.name + ", " + data.sys.country;
+let response = await fetch(url);
+
+let data = await response.json();
 
 
-    document.getElementById("temp").innerHTML =
-    data.main.temp + " °C";
+if(data.cod=="404"){
+
+alert("City not found");
+return;
+
+}
 
 
-    document.getElementById("condition").innerHTML =
-    data.weather[0].description;
+showWeather(data);
+
+getForecast(city);
 
 
-    document.getElementById("icon").src =
-    "https://openweathermap.org/img/wn/" 
-    + data.weather[0].icon + "@2x.png";
+}
 
 
-    document.getElementById("humidity").innerHTML =
-    "Humidity: " + data.main.humidity + "%";
+
+function showWeather(data){
 
 
-    document.getElementById("wind").innerHTML =
-    "Wind: " + data.wind.speed + " km/h";
+document.getElementById("city").innerHTML =
+data.name + ", " + data.sys.country;
+
+
+document.getElementById("temp").innerHTML =
+data.main.temp + " °C";
+
+
+document.getElementById("condition").innerHTML =
+data.weather[0].description;
+
+
+document.getElementById("icon").src =
+"https://openweathermap.org/img/wn/"
++ data.weather[0].icon + "@2x.png";
+
+
+document.getElementById("humidity").innerHTML =
+"Humidity: " + data.main.humidity + "%";
+
+
+document.getElementById("wind").innerHTML =
+"Wind: " + data.wind.speed + " km/h";
+
+
+}
+
+
+
+
+async function getForecast(city){
+
+
+let url =
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+
+let response = await fetch(url);
+
+let data = await response.json();
+
+
+let box = document.getElementById("forecast");
+
+box.innerHTML="";
+
+
+for(let i=0;i<5;i++){
+
+
+let item=data.list[i*8];
+
+
+box.innerHTML += `
+
+<div class="card">
+
+<p>${item.dt_txt.split(" ")[0]}</p>
+
+<img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+
+<p>${item.main.temp}°C</p>
+
+</div>
+
+`;
+
+}
 
 
 }
