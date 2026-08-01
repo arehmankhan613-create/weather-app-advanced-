@@ -1,6 +1,6 @@
 const apiKey = "3d12bfd7c67376c39b298450c321d916";
 
-alert("JS Connected");
+
 function getLocation(){
 
     navigator.geolocation.getCurrentPosition(getWeather);
@@ -32,13 +32,12 @@ async function getWeather(position){
 
 
 
-
 async function searchCity(){
 
     let city = document.getElementById("cityInput").value;
 
 
-    if(city==""){
+    if(city == ""){
 
         alert("Enter city name");
         return;
@@ -55,7 +54,7 @@ async function searchCity(){
     let data = await response.json();
 
 
-    if(data.cod=="404"){
+    if(data.cod == "404"){
 
         alert("City not found");
         return;
@@ -99,9 +98,7 @@ function showWeather(data){
     document.getElementById("wind").innerHTML =
     "Wind: " + data.wind.speed + " km/h";
 
-
 }
-
 
 
 
@@ -120,31 +117,34 @@ async function getForecast(city){
 
     let box = document.getElementById("forecast");
 
+
     box.innerHTML = "";
 
 
-    for(let i=0;i<5;i++){
+    for(let i = 0; i < 5; i++){
 
 
-        let item = data.list[i*8];
+        let item = data.list[i * 8];
 
 
         box.innerHTML += `
 
         <div class="card">
 
-        <p>${item.dt_txt.split(" ")[0]}</p>
+            <p>${item.dt_txt.split(" ")[0]}</p>
 
-        <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+            <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
 
-        <p>${item.main.temp}°C</p>
+            <h3>${item.main.temp}°C</h3>
+
+            <p>${item.weather[0].description}</p>
 
         </div>
 
         `;
 
+
     }
 
 
 }
-alert("JavaScript Connected");
