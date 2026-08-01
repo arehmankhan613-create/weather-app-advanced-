@@ -60,7 +60,11 @@ return;
 }
 
 
-showWeather(data);
+showWeather(data);document.getElementById("wind").innerHTML =
+"Wind: " + data.wind.speed + " km/h";
+
+getForecast(data.name);
+}
 
 getForecast(city);
 
