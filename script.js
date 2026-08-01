@@ -9,10 +9,13 @@ function getLocation(){
 
     }
     else{
+
         alert("Location not supported");
+
     }
 
 }
+
 
 
 async function getWeather(position){
@@ -27,13 +30,11 @@ async function getWeather(position){
 
     let response = await fetch(url);
 
-let data = await response.json();
-
-console.log(data);
+    let data = await response.json();
 
 
     document.getElementById("city").innerHTML =
-data.name + " " + data.sys.country;
+    data.name + ", " + data.sys.country;
 
 
     document.getElementById("temp").innerHTML =
@@ -43,9 +44,12 @@ data.name + " " + data.sys.country;
     document.getElementById("condition").innerHTML =
     data.weather[0].description;
 
-document.getElementById("icon").src =
-"https://openweathermap.org/img/wn/" 
-+ data.weather[0].icon + "@2x.png";
+
+    document.getElementById("icon").src =
+    "https://openweathermap.org/img/wn/" 
+    + data.weather[0].icon + "@2x.png";
+
+
     document.getElementById("humidity").innerHTML =
     "Humidity: " + data.main.humidity + "%";
 
@@ -53,44 +57,57 @@ document.getElementById("icon").src =
     document.getElementById("wind").innerHTML =
     "Wind: " + data.wind.speed + " km/h";
 
-
-}async function searchCity(){
-
-let city = document.getElementById("cityInput").value;
+}
 
 
-let url =
-`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 
-let response = await fetch(url);
+async function searchCity(){
 
-let data = await response.json();
-
-
-document.getElementById("city").innerHTML =
-data.name + ", " + data.sys.country;
+    let city = document.getElementById("cityInput").value;
 
 
-document.getElementById("temp").innerHTML =
-data.main.temp + " °C";
+    if(city == ""){
+
+        alert("Please enter city name");
+        return;
+
+    }
 
 
-document.getElementById("condition").innerHTML =
-data.weather[0].description;
+    let url =
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 
-document.getElementById("humidity").innerHTML =
-"Humidity: " + data.main.humidity + "%";
+    let response = await fetch(url);
+
+    let data = await response.json();
 
 
-document.getElementById("wind").innerHTML =
-"Wind: " + data.wind.speed + " km/h";
+
+    document.getElementById("city").innerHTML =
+    data.name + ", " + data.sys.country;
 
 
-document.getElementById("icon").src =
-"https://openweathermap.org/img/wn/" 
-+ data.weather[0].icon + "@2x.png";
+    document.getElementById("temp").innerHTML =
+    data.main.temp + " °C";
+
+
+    document.getElementById("condition").innerHTML =
+    data.weather[0].description;
+
+
+    document.getElementById("icon").src =
+    "https://openweathermap.org/img/wn/" 
+    + data.weather[0].icon + "@2x.png";
+
+
+    document.getElementById("humidity").innerHTML =
+    "Humidity: " + data.main.humidity + "%";
+
+
+    document.getElementById("wind").innerHTML =
+    "Wind: " + data.wind.speed + " km/h";
 
 
 }
