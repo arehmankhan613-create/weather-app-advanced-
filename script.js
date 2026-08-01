@@ -33,7 +33,7 @@ console.log(data);
 
 
     document.getElementById("city").innerHTML =
-    data.name;
+data.name + " " + data.sys.country;
 
 
     document.getElementById("temp").innerHTML =
