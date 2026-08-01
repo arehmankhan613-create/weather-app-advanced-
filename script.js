@@ -43,7 +43,9 @@ data.name + " " + data.sys.country;
     document.getElementById("condition").innerHTML =
     data.weather[0].description;
 
-
+document.getElementById("icon").src =
+"https://openweathermap.org/img/wn/" 
++ data.weather[0].icon + "@2x.png";
     document.getElementById("humidity").innerHTML =
     "Humidity: " + data.main.humidity + "%";
 
