@@ -1,6 +1,6 @@
 const apiKey = "3d12bfd7c67376c39b298450c321d916";
 
-
+alert("JS Connected");
 function getLocation(){
 
     navigator.geolocation.getCurrentPosition(getWeather);
