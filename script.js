@@ -32,6 +32,8 @@ async function getWeather(position){
 
 
 
+
+
 async function searchCity(){
 
     let city = document.getElementById("cityInput").value;
@@ -71,6 +73,7 @@ async function searchCity(){
 
 
 
+
 function showWeather(data){
 
 
@@ -98,7 +101,9 @@ function showWeather(data){
     document.getElementById("wind").innerHTML =
     "Wind: " + data.wind.speed + " km/h";
 
+
 }
+
 
 
 
@@ -131,11 +136,11 @@ async function getForecast(city){
 
         <div class="card">
 
-            <p>${item.dt_txt.split(" ")[0]}</p>
+            <h4>${item.dt_txt.split(" ")[0]}</h4>
 
             <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
 
-            <h3>${item.main.temp}°C</h3>
+            <h3>${item.main.temp} °C</h3>
 
             <p>${item.weather[0].description}</p>
 
@@ -143,8 +148,7 @@ async function getForecast(city){
 
         `;
 
-
     }
 
 
-}console.log("Forecast Function Loaded");
+}
