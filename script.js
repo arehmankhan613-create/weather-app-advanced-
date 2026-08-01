@@ -23,7 +23,7 @@ async function getWeather(position){
 
     let data = await response.json();
 
-
+console.log(data);
     showWeather(data);
 
     getForecast(data.name);
