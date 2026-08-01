@@ -147,3 +147,4 @@ async function getForecast(city){
 
 
 }
+alert("JavaScript Connected");
