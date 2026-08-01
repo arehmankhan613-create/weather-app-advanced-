@@ -108,7 +108,49 @@ function showWeather(data){
 
 
 
-async function getForecast(city){
+async function getForecast(city){async function getForecast(city){
+
+    let url =
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+
+    let response = await fetch(url);
+
+    let data = await response.json();
+
+
+    let box = document.getElementById("forecast");
+
+    box.innerHTML = "";
+
+
+    for(let i = 0; i < 5; i++){
+
+        let item = data.list[i * 8];
+
+
+        let date = item.dt_txt.split(" ")[0];
+
+
+        box.innerHTML += `
+
+        <div class="card">
+
+            <h4>${date}</h4>
+
+            <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
+
+            <h3>${item.main.temp}°C</h3>
+
+            <p>${item.weather[0].description}</p>
+
+        </div>
+
+        `;
+
+    }
+
+}
 
 
     let url =
